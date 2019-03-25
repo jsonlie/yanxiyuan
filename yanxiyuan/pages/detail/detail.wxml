@@ -1,0 +1,11 @@
+<!--detail.wxml-->
+<view class="container">
+    <view class="art-header">
+        <image wx:for="{{img_file_list}}" bindtap="showPic" data-src="{{item}}" src="{{item}}" class="art-img"/>
+        <view class="art-title">{{details.content}}</view>
+        <view class="art-source">{{details.cdate}}</view>
+    </view>
+    <view>
+      <view>点赞数：{{details.priase_num}}</view>
+    </view>
+</view>

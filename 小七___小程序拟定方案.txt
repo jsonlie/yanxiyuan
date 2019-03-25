@@ -1,0 +1,157 @@
+小程序：liyanxi201807@163.com
+密码：yss870524
+小程序AppSecret：8fa68c5b0429d2070bc3879b19b06d0a
+小程序AppID：wxcb0234ade6295efd
+消息加密密钥：XpQroNpmkkJLTQBz8M9T7jgT4epS1AT5VKeDMYDKaDQ
+消息推送加密密钥：r2td8tFch7snXdaQLwIyIpv4IOeS4ljJjBg4lQTD1P4
+
+消息推送URL:	http://www.hbmpacc.cn/applet/applet/Api/verify
+Token:	lyxysslq
+EncodingAESKey：02Yqtl34X2xiaMKS25nzEzCYuKiO5EcbAwE3tNTYMhS
+数据格式：json
+
+1，用户授权进入：获取用户微信头像，昵称，性别，openid，unionid  //登录逻辑要改一下，不用授权直接可以进
+2，记录小七成长过程：每天记录生活动态（文字+图片+录音）（默认记录类型为隐私，可以自己设置为公开）
+3，推送服务消息（生活动态有人评论或赞时）
+4，设置事件标记（生日，纪念日，第一次开口说话，第一次走路……）
+5，可以设置一个类似“朋友圈”的页面，展示公开类型的记录
+6，设置3个tab页，分别是“言”，“蹊”，“园”
+	言：发表每日小七相关图片文章，下面展示备忘事件
+	蹊：查看之前发表过的文章（全部和自己，可以切换按钮）
+	园：展示小七的信息资料，身体成长情况(身高，体重分析图),生活习惯等
+7，在看到别人公开的生活动态时，可以点赞（评论功能先不做）
+8，待定。
+
+
+
+
+
+数据库设计：
+
+新建数据表：lq_app_user		小程序用户表
+user_id			int(11)		PK   AI  
+openid			varchar(255)	小程序openid
+unionid			varchar(255)	微信公众平台识别id
+nickname		varchar(255)	昵称
+sex			tinyint(1)	性别：0-未知，1-男，2-女
+headimgurl		varchar(512)	头像
+ctime			int(11)		创建时间
+
+新建数据表：lq_user_baby	小宝贝信息表
+baby_id			int(11)		PK   AI  
+user_id			int(11)		用户id
+name			varchar(32)	名字
+sex			tinyint(1)	性别：0-未知，1-男，2-女
+bathday			int(11)		出生日期
+blood			varchar(8)	血型
+height			varchar(8)	身高(cm)
+weight			varchar(8)	体重(kg)
+imgurl_id		int(11)		相片id
+allergy			varchar(1024)	过敏源
+fond_food		varchar(1024)	喜欢的食物
+hate_food		varchar(1024)	讨厌的食物
+fond_sport		varchar(1024)	喜欢的运动
+hate_sport		varchar(1024)	讨厌的运动
+words			varchar(1024)	寄语期望
+ctime			int(11)		创建时间
+
+新建数据表：lq_baby_group	小宝贝成长记录表
+id			int(11)		PK   AI  
+baby_id			int(11)		宝贝id
+type			tinyint(2)	类型：1-身高，2-体重
+change			varchar(8)	变化值
+ctime			int(11)		创建时间
+
+新建数据表：lq_community	社区内容表
+id			int(11)		PK   AI
+content			varchar(1024)	主体内容
+type			tinyint(1)	类型：0-个人，1-公开
+sort			tinyint(4)	排序
+status			tinyint(1)	状态：0-正常，1-删除
+user_id			int(11)		用户id
+ctime			int(11)		创建时间
+
+新建数据表：lq_com_images	社区内容图片关联表
+id			int(11)		PK   AI
+community_id		int(11)		社区内容id
+upload_id		int(11)		资源id
+type			tinyint(1)	类型：1-图片，2-录音
+ctime			int(11)		创建时间
+
+
+新建数据表：lq_condition	社区情况表
+id			int(11)		PK   AI
+community_id		int(11)		社区内容id
+type			tinyint(1)	类型：1-评论，2-点赞
+moment			varchar(1024)	评论内容
+from_user_id		int(11)		评论用户id
+to_user_id		int(11)		被评论用户id
+flag			tinyint(1)	消息是否已读：0-未读，1-已读
+status			tinyint(1)	状态：0-正常，1-删除
+ctime			int(11)		创建时间
+
+新建数据表：lq_event_memo	事件备忘表
+id			int(11)		PK   AI
+event_name		varchar(128)	事件名称
+event_time		int(11)		事件时间
+user_id			int(11)		用户id
+object_type		tinyint(4)
+object_id		int(11)
+status			tinyint(1)	事件状态：0-正常，1-删除
+ctime			int(11)		创建时间
+
+
+新建数据表：lq_user_form	表单存储表		
+id			int(11)		PK   AI
+user_id			int(11)		用户id
+form_id			varchar(512)	表单id
+ctime			int(11)		创建时间
+utime			int(11)		使用时间
+
+新建数据表：lq_upload		文件资源表
+id			int(11)		PK   AI
+file_name		varchar(256)	文件名
+file_path		varchar(256)	文件相对路径
+file_type		tinyint(1)	文件类型：1-图片，2-语音，3-视频
+file_size		int(11)		文件大小（单位kb）
+format			varchar(12)	文件格式（包括句点）
+resource_type		tinyint(1)	文件来源：1-足迹，2-宝贝相片
+status			tinyint(1)	状态：0-正常，1-删除
+ctime			int(11)		创建时间
+
+新建数据表：lq_config		配置表
+id			int(11)		PK   AI
+name			varchar(64)	配置名称
+key			varchar(32)	配置键名
+values			longtext	配置值
+status			tinyint(2)	状态：0-开启，1-关闭
+ctime			int(11)		创建时间
+utime			int(11)		修改时间
+
+新建数据表：lq_storage		存储配置表
+id			int(11)		PK   AI
+key			varchar(256)	存储键名
+value			varchar(256)	存储值
+expire_time		int(11)		过期时间
+ctime			int(11)		创建时间
+
+线上接口地址：http://www.hbmpacc.cn/applet/applet/Api/pushMsg
+
+开发注意事项：
+1，接口请求时加验证，没有redis服务器所以用数据表代替
+2，未授权时提示去设置授权
+3，开发并调试数据接口
+4，图片上传，语音上传
+5，消息推送  
+
+//2018-05-02修改：
+1，wx.request方法要封装一下，如果session_key不存在或是已过期，则要先调用login方法获取session_key
+2，不需要用户授权，以用户openid为唯一标识，登录时自动生成一个随机名称,用户自己可以修改，图像也是自己上传
+
+2018-11-21不做授权登录，直接将用户openid作为账号（有就直接取数据，没有就创建）
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/theme/theme",
+    "pages/detail/detail",
+    "pages/center/center",
+    "pages/tips/tips",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#40d8af",
+    "navigationBarTitleText": "言 蹊 园",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "images/icon_API.png",
+      "selectedIconPath": "images/icon_API_HL.png",
+      "text": "言"
+    }, {
+      "pagePath": "pages/theme/theme",
+      "iconPath": "images/icon_component.png",
+      "selectedIconPath": "images/icon_component_HL.png",
+      "text": "蹊"
+    },
+    {
+      "pagePath": "pages/center/center",
+      "iconPath": "images/icon_component.png",
+      "selectedIconPath": "images/icon_component_HL.png",
+      "text": "园"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000
+  }
+}

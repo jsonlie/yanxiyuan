@@ -1,0 +1,25 @@
+/**index.wxss**/
+.index{
+  padding-bottom:30rpx;
+}
+
+.widgets__cry-img{
+  display:block;
+  width:134rpx;
+  height: 110rpx;
+  background-size: contain;
+  margin:100rpx auto 20rpx;
+}
+
+.not-more{
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  padding-top:30rpx;
+}
+
+.set-set-auth{
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+}

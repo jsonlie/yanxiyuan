@@ -1,0 +1,58 @@
+<!--list.wxml-->
+<view class="container">
+  <view class="news-item-container">
+    
+      <view class="news-item" >
+        <view class="news-item-left">
+          <text class="news-item-title">{{user_list.nickname}}</text>
+          <text class="news-item-title">{{user_list.sex == 1 ? '男' : '女'}}</text>
+        </view>
+        <view class="news-item-right">
+          <image src="{{user_list.headimgurl}}" bindtap="showMmPic" data-src="{{user_list.headimgurl}}" class="news-image"/>
+        </view>
+      </view>
+
+      <view class="news-item">
+        <view>
+          <picker bindchange="bindPickerChange" value="{{Num}}" range="{{user_list.baby_list}}" range-key="name">
+            <view class="picker">当前宝贝：{{user_list.baby_list[Num].name}}</view>
+          </picker>
+        </view>
+        <view class="news-item-right">
+          <image src="{{baby_imgs[0]}}" bindtap="showPic" data-src="{{baby_imgs[0]}}" class="news-image"></image>
+        </view>
+      </view>
+
+      <view class="news-item">
+        <view>宝贝生日：{{baby_detail.bathday}}</view>
+      </view>
+      <view class="news-item">
+        <view>性别：{{baby_detail.sex == 1 ? '男' : '女'}}</view>
+      </view>
+      <view class="news-item">
+        <view>身高：{{baby_detail.height}} cm</view>
+      </view>
+      <view class="news-item">
+        <view>体重：{{baby_detail.weight}} kg</view>
+      </view>
+      <view class="news-item">
+        <view>过敏物：{{baby_detail.allergy}}</view>
+      </view>
+      <view class="news-item">
+        <view>喜欢的食物：{{baby_detail.fond_food}}</view>
+      </view>
+      <view class="news-item">
+        <view>喜欢的运动：{{baby_detail.fond_sport}}</view>
+      </view>
+      <view class="news-item">
+        <view>讨厌的食物：{{baby_detail.hate_food}}</view>
+      </view>
+      <view class="news-item">
+        <view>讨厌的运动：{{baby_detail.hate_sport}}</view>
+      </view>
+      <view class="news-item">
+        <view>对宝宝的期望：{{baby_detail.words}}</view>
+      </view>
+    
+  </view>
+</view>

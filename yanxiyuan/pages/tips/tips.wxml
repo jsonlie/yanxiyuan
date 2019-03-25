@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="index">
+      <!-- <image class="widgets__cry-img" src="{{host}}static/app/project/index/resources/cry.png" /> -->
+      <view class="not-more" >您必须先授权才能使用噢~</view> 
+      <button class="set-auth" bindtap="setAuth">去设置</button>
+</view>

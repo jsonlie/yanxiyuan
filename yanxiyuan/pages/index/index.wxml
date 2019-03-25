@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="news-item-container">
+    <form bindsubmit="formSubmit" report-submit="true">
+      <textarea name="content" placeholder="每天不一样……" maxlength="1024" value="{{community}}"></textarea>
+      <switch name="type" type="switch" color="#3cc51f" checked bindchange="switchChange">{{switch_name}}</switch>
+      <view>
+        <image class="upimg" bindtap="upimg" src="../../images/icon_API_HL.png"></image>
+        <block wx:for="{{imgArr}}">
+          <view>
+            <image class="reimg" src="{{item}}"></image>
+          </view>
+        </block>
+      </view>
+      <button plain="true" form-type="submit" type="primary">发表</button>
+    </form>
+  </view>
+
+  <view class="news-item-container">
+    <block wx:if="{{eventMemoList}}">
+      <text class="sub-title">备忘事件：</text>
+      <view class="news-item" wx:for="{{eventMemoList}}" wx:for-item="event">
+        <view class="news-item-left">
+          <text class="news-item-title">{{event.event_name}}</text>
+          <text>{{event.event_time}}</text>
+        </view>
+      </view>
+    </block>    
+  </view>
+  
+</view>

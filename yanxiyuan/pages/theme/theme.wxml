@@ -1,0 +1,26 @@
+<!--theme.wxml-->
+<view>
+  <switch name="type" type="switch" color="#3cc51f" checked bindchange="switchChange">{{switch_name}}</switch>
+</view>
+<view class="container">
+    <navigator class="card" url="../detail/detail?com_id={{item.id}}"  wx:for="{{comList}}" wx:for-item="item">
+        <block wx:for="{{item.img_list}}" wx:for-item="it">
+          <image src="{{it.file_path}}" class="card-image"></image>
+        </block>
+        
+        <view class="card-content">
+            <view>
+                <text class="card-title">{{item.content}}</text>
+            </view>
+            <view>
+                <text class="card-desc">{{item.nickname}}---{{item.cdate}}</text>
+            </view>
+        </view>
+    </navigator>
+    <block wx:if="{{isLoadMore}}">
+      <view bindtap="loadMore">点击加载更多……</view>
+    </block>
+    <block wx:else>
+      <view bindtap="loadMore">已经到底啦！</view>
+    </block>
+</view>
